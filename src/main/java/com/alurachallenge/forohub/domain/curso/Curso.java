@@ -2,10 +2,7 @@ package com.alurachallenge.forohub.domain.curso;
 
 import com.alurachallenge.forohub.domain.topico.Topico;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;

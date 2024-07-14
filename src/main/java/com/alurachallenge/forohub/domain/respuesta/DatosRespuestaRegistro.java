@@ -3,7 +3,6 @@ package com.alurachallenge.forohub.domain.respuesta;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-
 public record DatosRespuestaRegistro(
         @NotNull
         Long autorId,
@@ -13,8 +12,5 @@ public record DatosRespuestaRegistro(
 
         @NotBlank
         String mensaje
-
-//        @NotNull
-//        boolean solucion
 ) {
 }

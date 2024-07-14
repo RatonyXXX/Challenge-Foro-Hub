@@ -1,6 +1,5 @@
 package com.alurachallenge.forohub.domain.topico;
 
-
 import java.time.LocalDateTime;
 
 public record DatosTopicoDetalle(

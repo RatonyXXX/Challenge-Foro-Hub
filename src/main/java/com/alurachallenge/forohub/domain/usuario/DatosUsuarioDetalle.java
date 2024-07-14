@@ -1,11 +1,8 @@
 package com.alurachallenge.forohub.domain.usuario;
 
 import com.alurachallenge.forohub.domain.perfil.Perfil;
-import com.alurachallenge.forohub.domain.topico.Topico;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 

@@ -10,7 +10,6 @@ public class CursoService {
     @Autowired
     private CursoRepository cursoRepository;
 
-
     public Object actualizarCurso(DatosCursoActualizar datosCurso) {
 
         if (!cursoRepository.findById(datosCurso.id()).isPresent()) {
@@ -25,24 +24,6 @@ public class CursoService {
         var curso = cursoRepository.findById(datosCurso.id()).get();
         curso.actualizarCurso(datosCurso);   // Actualizar perfil
         return cursoRepository.save(curso);
-
-//                .orElseThrow(() ->
-//                        new ValidacionIntegridad("Curso no encontrado con ID: " + datosCurso.id()));
-
-        // Verificar si el nuevo nombre ya existe en otro curso
-//        if (datosCurso.nombre() != null &&
-//                cursoRepository.existsByNombreAndIdNot(datosCurso.nombre(), datosCurso.id())) {
-//            throw new ValidacionIntegridad("El nombre del curso ya existe");
-//        }
-
-//        curso.actualizarCurso(datosCurso);   // Actualizar perfil
-//        return new DatosCursoDetalle(curso);
-
-
-
-
-
-
     }
 
 }

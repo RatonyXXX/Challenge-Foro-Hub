@@ -1,9 +1,8 @@
 package com.alurachallenge.forohub.controller;
 
-import com.alurachallenge.forohub.domain.perfil.DatosPerfilDetalle;
-import com.alurachallenge.forohub.domain.perfil.Perfil;
 import com.alurachallenge.forohub.domain.usuario.*;
 import com.alurachallenge.forohub.infra.errores.ValidacionIntegridad;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +15,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/usuario")
-//@SecurityRequirement(name = "bearer-key")
+@SecurityRequirement(name = "bearer-key")
 public class UsuarioController {
 
-//    @Autowired
-//    public UsuarioController(UsuarioService usuarioService) {
-//        this.usuarioService = usuarioService;
-//    }
     @Autowired
     private UsuarioService usuarioService;
 
@@ -34,13 +29,8 @@ public class UsuarioController {
     //@Operation(summary = "Registra un nuevo medico en la base de datos")
     public ResponseEntity registrarUsuarioConPerfil(@RequestBody @Valid DatosUsuarioRegistro datosUsuario, UriComponentsBuilder uriBuilder)
             throws ValidacionIntegridad {
-
-//        var response = usuarioService.registrarUsuarioConPerfil(datosUsuario);
-//        return ResponseEntity.ok(response);
         var usuario = usuarioService.registrarUsuarioConPerfil(datosUsuario);
-
         var uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.id()).toUri();
-//        return ResponseEntity.created(uri).body(new DatosUsuarioDetalle(usuario()));
         return ResponseEntity.created(uri).body(usuario);
     }
 
@@ -48,7 +38,6 @@ public class UsuarioController {
     @Transactional
 //    @Operation(summary = "Actualiza las informaciones para el paciente")
     public ResponseEntity actualizar(@RequestBody @Valid DatosUsuarioActualizar datosUsuario) {
-
         var usuario = usuarioRepository.getReferenceById(datosUsuario.id());
         usuario.actualizarUsuario(datosUsuario);
         return ResponseEntity.ok(new DatosUsuarioDetalle(usuario));

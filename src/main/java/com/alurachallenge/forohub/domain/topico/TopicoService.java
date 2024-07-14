@@ -2,8 +2,6 @@ package com.alurachallenge.forohub.domain.topico;
 
 import com.alurachallenge.forohub.domain.curso.Curso;
 import com.alurachallenge.forohub.domain.curso.CursoRepository;
-import com.alurachallenge.forohub.domain.curso.DatosCursoDetalle;
-import com.alurachallenge.forohub.domain.usuario.DatosUsuarioDetalle;
 import com.alurachallenge.forohub.domain.usuario.Usuario;
 import com.alurachallenge.forohub.domain.usuario.UsuarioRepository;
 import com.alurachallenge.forohub.infra.errores.ValidacionIntegridad;
@@ -68,6 +66,7 @@ public class TopicoService {
         return usuarioRepository.findById(autorId)
                 .orElseThrow(() -> new ValidacionIntegridad("Autor no encontrado con ID: " + autorId));
     }
+
     private Curso obtenerCurso(Long cursoId) {
         if (cursoId == null) {
             throw new ValidacionIntegridad("El ID del curso no puede ser nulo");
@@ -75,6 +74,7 @@ public class TopicoService {
         return cursoRepository.findById(cursoId)
                 .orElseThrow(() -> new ValidacionIntegridad("Curso no encontrado con ID: " + cursoId));
     }
+
     private Topico obtenerTopico(Long topicoId) {
         if (topicoId == null) {
             throw new ValidacionIntegridad("El ID del topico no puede ser nulo");

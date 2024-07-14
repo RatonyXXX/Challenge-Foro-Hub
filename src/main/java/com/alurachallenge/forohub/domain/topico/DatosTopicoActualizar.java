@@ -9,13 +9,11 @@ public record DatosTopicoActualizar(
 
         String mensaje,
         TopicoStatus status,
-//        Curso curso
         Long cursoId
 
 ) {
         public Curso curso() {
                 return cursoId != null ? new Curso(cursoId) : null;
         }
-
 
 }

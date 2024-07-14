@@ -45,10 +45,6 @@ public class Topico {
     @Column(nullable = false)
     private Integer respuestas = 0;
 
-//    @OneToMany(mappedBy = "topico")
-//    private List<Respuesta> respuestas;
-
-
     public Topico(DatosTopicoRegistro datosTopico, Usuario autor, Curso curso) {
         this.titulo = datosTopico.titulo();
         this.mensaje = datosTopico.mensaje();
@@ -79,9 +75,5 @@ public class Topico {
     public void setRespuestas(int respuestas) {
         this.respuestas = respuestas;
     }
-
-//    public TopicoStatus getStatus() {
-//        return status;
-//    }
 
 }

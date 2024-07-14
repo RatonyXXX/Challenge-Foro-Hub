@@ -72,12 +72,6 @@ public class RespuestaService {
         }
     }
 
-//    private void validarMensaje(String mensaje, Long topicoId) {
-//        if (respuestaRepository.findByMensajeAndTopicoId(mensaje, topicoId).isPresent()) {
-//            throw new ValidacionIntegridad("Ya existe una respuesta con el mismo mensaje para este tópico");
-//        }
-//    }
-
     private void validarMensaje(String mensaje, Long topicoId, Long respuestaId) {
         boolean mensajeExistente;
         if (respuestaId == null) {
@@ -95,11 +89,8 @@ public class RespuestaService {
         Topico topico = topicoRepository.findById(topicoId)
                 .orElseThrow(() -> new ValidacionIntegridad("Tópico no encontrado con ID: " + topicoId));
 
-        // Obtener y actualizar el número de respuestas
         int cantidadRespuestas = respuestaRepository.countByTopicoId(topicoId);
         topico.setRespuestas(cantidadRespuestas);
-
-        // Guardar el Topico actualizado
         topicoRepository.save(topico);
     }
 }

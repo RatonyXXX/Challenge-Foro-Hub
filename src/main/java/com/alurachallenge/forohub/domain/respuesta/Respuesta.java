@@ -3,12 +3,7 @@ package com.alurachallenge.forohub.domain.respuesta;
 import com.alurachallenge.forohub.domain.topico.Topico;
 import com.alurachallenge.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 

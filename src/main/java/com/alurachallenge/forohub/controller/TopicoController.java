@@ -1,6 +1,7 @@
 package com.alurachallenge.forohub.controller;
 
 import com.alurachallenge.forohub.domain.topico.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/topico")
-//@SecurityRequirement(name = "bearer-key")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
     @Autowired
@@ -35,7 +36,6 @@ public class TopicoController {
     @Transactional
 //    @Operation(summary = "Actualiza las informaciones para el paciente")
     public ResponseEntity actualizar(@RequestBody @Valid DatosTopicoActualizar datosTopico) {
-
         var response = topicoService.actualizarTopico(datosTopico);
         return ResponseEntity.ok(response);
     }
@@ -43,10 +43,6 @@ public class TopicoController {
     @GetMapping("/{id}")
 //    @Operation(summary = "obtiene los detalles de la consulta con el ID indicado")
     public ResponseEntity detalle(@PathVariable Long id) {
-
-//        var topico = topicoRepository.getReferenceById(id);
-//        return ResponseEntity.ok(new DatosTopicoDetalle(topico));
-
         var topico = topicoService.detalleTopico(id);
         return ResponseEntity.ok(topico);
     }
@@ -58,7 +54,6 @@ public class TopicoController {
             @RequestParam(required = false) String cursoNombre,
             @RequestParam(required = false) Integer anio
     ) {
-
         Page<DatosTopicoDetalle> page;
 
         if (cursoNombre != null && anio != null) {

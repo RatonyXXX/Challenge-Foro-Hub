@@ -1,8 +1,4 @@
 package com.alurachallenge.forohub.domain.respuesta;
-
-import com.alurachallenge.forohub.domain.topico.Topico;
-import com.alurachallenge.forohub.domain.usuario.Usuario;
-
 import java.time.LocalDateTime;
 
 public record DatosRespuestaDetalle(

@@ -12,6 +12,5 @@ public record DatosRespuestaActualizar(
         String mensaje,
         Boolean solucion
 
-
 ) { }
 
