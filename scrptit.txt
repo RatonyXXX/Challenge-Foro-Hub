@@ -1,0 +1,188 @@
+
+
+CREATE TABLE Usuario (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correoElectronico VARCHAR(100) NOT NULL UNIQUE,
+    contrasena VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Perfil (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Usuario_Perfil (
+    usuario_id INT NOT NULL,
+    perfil_id INT NOT NULL,
+    PRIMARY KEY (usuario_id, perfil_id),
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
+    FOREIGN KEY (perfil_id) REFERENCES Perfil(id)
+);
+
+CREATE TABLE Curso (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    categoria VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Topico (
+    id SERIAL PRIMARY KEY,
+    titulo VARCHAR(200) NOT NULL,
+    mensaje TEXT NOT NULL,
+    fechaCreacion TIMESTAMP NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    autor INT NOT NULL,
+    curso INT NOT NULL,
+    respuestas INT,
+    FOREIGN KEY (autor) REFERENCES Usuario(id),
+    FOREIGN KEY (curso) REFERENCES Curso(id)
+);
+
+CREATE TABLE Respuesta (
+    id SERIAL PRIMARY KEY,
+    mensaje TEXT NOT NULL,
+    topico INT NOT NULL,
+    fechaCreacion TIMESTAMP NOT NULL,
+    autor INT NOT NULL,
+    solucion BOOLEAN NOT NULL,
+    FOREIGN KEY (topico) REFERENCES Topico(id),
+    FOREIGN KEY (autor) REFERENCES Usuario(id)
+);
+
+
+
+INSERT INTO Perfil (nombre) 
+VALUES ('ADMINISTRADOR');
+INSERT INTO Perfil (nombre) 
+VALUES ('MODERADOR');
+INSERT INTO Perfil (nombre) 
+VALUES ('USUARIO_NORMAL');
+INSERT INTO Perfil (nombre) 
+VALUES ('INVITADO');
+
+-- Cursos relacionados con Desarrollo Backend
+INSERT INTO Curso (nombre, categoria) VALUES
+('API Restful con Spring Boot', 'Desarrollo Backend'),
+('Arquitectura de Microservicios', 'Desarrollo Backend'),
+('Desarrollo de Aplicaciones Escalables', 'Desarrollo Backend'),
+('Desarrollo de Aplicaciones Web con Java EE', 'Desarrollo Backend'),
+('Desarrollo de Backend con Node.js', 'Desarrollo Backend'),
+('Desarrollo de Servicios Web REST', 'Desarrollo Backend'),
+('Docker para Desarrolladores', 'Desarrollo Backend'),
+('Fundamentos de Arquitectura de Software', 'Desarrollo Backend'),
+('Gestión de APIs con Apigee', 'Desarrollo Backend'),
+('Implementación de JWT en APIs', 'Desarrollo Backend'),
+('Integración Continua y Entrega Continua', 'Desarrollo Backend'),
+('Programación Concurrente en Java', 'Desarrollo Backend'),
+('Programación Funcional en Java', 'Desarrollo Backend'),
+('Seguridad en Aplicaciones Web', 'Desarrollo Backend'),
+('Testing de APIs', 'Desarrollo Backend');
+
+-- Cursos relacionados con Fundamentos de Software
+INSERT INTO Curso (nombre, categoria) VALUES
+('Arquitectura de Software', 'Fundamentos de Software'),
+('Base de Datos Relacionales', 'Fundamentos de Software'),
+('Fundamentos de Cloud Computing', 'Fundamentos de Software'),
+('Fundamentos de Desarrollo Web', 'Fundamentos de Software'),
+('Fundamentos de Sistemas Operativos', 'Fundamentos de Software'),
+('Introducción a la Programación', 'Fundamentos de Software'),
+('Métodos Ágiles de Desarrollo de Software', 'Fundamentos de Software'),
+('Patrones de Diseño de Software', 'Fundamentos de Software'),
+('Principios SOLID en Programación', 'Fundamentos de Software'),
+('Seguridad Informática', 'Fundamentos de Software');
+
+-- Cursos relacionados con Gestión de Proyectos
+INSERT INTO Curso (nombre, categoria) VALUES
+('Desarrollo Ágil con Scrum', 'Gestión de Proyectos'),
+('Gestión de Proyectos de Software', 'Gestión de Proyectos'),
+('Liderazgo en Equipos de Desarrollo', 'Gestión de Proyectos'),
+('Planificación y Estimación de Proyectos', 'Gestión de Proyectos');
+
+-- Cursos relacionados con Ingeniería de Software
+INSERT INTO Curso (nombre, categoria) VALUES
+('Gestión de Configuración', 'Ingeniería de Software'),
+('Ingeniería de Requisitos', 'Ingeniería de Software'),
+('Modelado y Diseño de Software', 'Ingeniería de Software'),
+('Patrones de Diseño Orientado a Objetos', 'Ingeniería de Software'),
+('Pruebas de Software', 'Ingeniería de Software'),
+('Seguridad en Desarrollo de Software', 'Ingeniería de Software');
+
+-- Cursos relacionados con Programación Avanzada
+INSERT INTO Curso (nombre, categoria) VALUES
+('Análisis y Diseño de Algoritmos', 'Programación Avanzada'),
+('Estructuras de Datos', 'Programación Avanzada'),
+('Programación en C#', 'Programación Avanzada'),
+('Programación en Python', 'Programación Avanzada'),
+('Programación en Ruby', 'Programación Avanzada'),
+('Programación en Scala', 'Programación Avanzada'),
+('Programación Orientada a Objetos en Java', 'Programación Avanzada'),
+('Programación Paralela y Concurrente', 'Programación Avanzada');
+
+-- Cursos relacionados con Tecnologías Emergentes
+INSERT INTO Curso (nombre, categoria) VALUES
+('Desarrollo de Aplicaciones Móviles', 'Tecnologías Emergentes'),
+('Internet de las Cosas (IoT)', 'Tecnologías Emergentes'),
+('Realidad Virtual y Aumentada', 'Tecnologías Emergentes'),
+('Blockchain: Fundamentos y Aplicaciones', 'Tecnologías Emergentes'),
+('Computación Cuántica', 'Tecnologías Emergentes'),
+('Machine Learning y Data Science', 'Tecnologías Emergentes'),
+('Robótica Avanzada', 'Tecnologías Emergentes');
+
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+
+
+
+
+
+INSERT INTO Usuario (nombre, correoElectronico, contrasena) 
+VALUES ('Juan Pérez', 'juan@example.com', 'contraseña123');
+INSERT INTO Usuario (nombre, correoElectronico, contrasena) 
+VALUES ('María López', 'maria@example.com', 'clave456');
+
+
+INSERT INTO Perfil (nombre) 
+VALUES ('ADMINISTRADOR');
+INSERT INTO Perfil (nombre) 
+VALUES ('USUARIO_NORMAL');
+INSERT INTO Perfil (nombre) 
+VALUES ('MODERADOR');
+
+
+-- Asignación de perfiles al usuario Juan Pérez (Usuario ID 1)
+INSERT INTO Usuario_Perfil (usuario_id, perfil_id) 
+VALUES (1, 1);  -- Juan Pérez es ADMINISTRADOR
+INSERT INTO Usuario_Perfil (usuario_id, perfil_id) 
+VALUES (1, 2);  -- Juan Pérez también es USUARIO_NORMAL
+-- Asignación de perfiles a María López (Usuario ID 2)
+INSERT INTO Usuario_Perfil (usuario_id, perfil_id) 
+VALUES (2, 2);  -- María López es USUARIO_NORMAL
+INSERT INTO Usuario_Perfil (usuario_id, perfil_id) 
+VALUES (2, 3);  -- María López también es MODERADOR
+
+
+INSERT INTO Curso (nombre, categoria)
+VALUES ('Introducción a Spring Boot', 'Desarrollo Web');
+INSERT INTO Curso (nombre, categoria)
+VALUES ('Bases de Datos Relacionales', 'Fundamentos de Datos');
+
+
+INSERT INTO Topico (titulo, mensaje, fechaCreacion, status, autor, curso, respuestas)
+VALUES ('Configuración inicial de Spring Boot', '¿Cómo configurar correctamente un proyecto Spring Boot?', '2023-01-15 10:00:00', 'ABIERTO', 1, 1, 3);
+INSERT INTO Topico (titulo, mensaje, fechaCreacion, status, autor, curso, respuestas)
+VALUES ('Modelado de bases de datos', '¿Cuáles son las mejores prácticas para el diseño de bases de datos relacionales?', '2023-02-20 14:30:00', 'CERRADO', 2, 2, 2);
+
+
+INSERT INTO Respuesta (mensaje, topico, fechaCreacion, autor, solucion)
+VALUES ('Para configurar Spring Boot, primero debes crear un archivo de configuración...', 1, '2023-01-16 09:45:00', 2, false);
+INSERT INTO Respuesta (mensaje, topico, fechaCreacion, autor, solucion)
+VALUES ('Una buena práctica es normalizar las tablas para evitar redundancias...', 2, '2023-02-21 10:15:00', 1, true);
+INSERT INTO Respuesta (mensaje, topico, fechaCreacion, autor, solucion)
+VALUES ('Puedes usar Hibernate para simplificar el manejo de la base de datos...', 1, '2023-01-17 11:20:00', 3, false);
+INSERT INTO Respuesta (mensaje, topico, fechaCreacion, autor, solucion)
+VALUES ('Asegúrate de indexar las columnas más utilizadas para mejorar el rendimiento...', 2, '2023-02-22 12:00:00', 2, false);
