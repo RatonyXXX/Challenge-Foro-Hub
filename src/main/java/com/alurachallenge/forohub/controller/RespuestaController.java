@@ -1,6 +1,7 @@
 package com.alurachallenge.forohub.controller;
 
 import com.alurachallenge.forohub.domain.respuesta.*;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public class RespuestaController {
 
     @PostMapping
     @Transactional
-//    @Operation(summary = "Registra un nuevo paciente")
+    @Operation(summary = "Registra una nueva respuesta",
+            tags = "Respuestas",
+            description = "Registra una nueva respuesta con los detalles proporcionados en la solicitud.")
     public ResponseEntity registro(@RequestBody @Valid DatosRespuestaRegistro datosRespuesta, UriComponentsBuilder uriBuilder) {
         var respuesta = respuestaService.registrarRespuesta(datosRespuesta);
         var uri = uriBuilder.path("/respuesta/{id}").buildAndExpand(respuesta.Id()).toUri();
@@ -35,21 +38,27 @@ public class RespuestaController {
 
     @PutMapping
     @Transactional
-//    @Operation(summary = "Actualiza las informaciones para el paciente")
+    @Operation(summary = "Actualiza una respuesta",
+            tags = "Respuestas",
+            description = "Actualiza la información de una respuesta existente con los nuevos detalles proporcionados.")
     public ResponseEntity actualizar(@RequestBody @Valid DatosRespuestaActualizar datosRespuesta) {
         var response = respuestaService.actualizarRespuesta(datosRespuesta);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-//    @Operation(summary = "obtiene los detalles de la consulta con el ID indicado")
+    @Operation(summary = "Obtiene los detalles de una respuesta",
+            tags = "Respuestas",
+            description = "Obtiene los detalles completos de una respuesta específica utilizando su ID.")
     public ResponseEntity detalle(@PathVariable Long id) {
         var respuesta = respuestaRepository.getReferenceById(id);
         return ResponseEntity.ok(new DatosRespuestaDetalle(respuesta));
     }
 
     @GetMapping
-    //@Operation(sumary = "Obtiene un listado de los perfiles registrados")
+    @Operation(summary = "Obtiene un listado de respuestas",
+            tags = "Respuestas",
+            description = "Obtiene un listado paginado de todas las respuestas registradas en el sistema.")
     public ResponseEntity<Page<DatosRespuestaDetalle>> listado(
             @PageableDefault(size = 100, sort = "Id") Pageable paginacion) {
         var page = respuestaRepository.findAll(paginacion).map(DatosRespuestaDetalle::new);
@@ -58,7 +67,9 @@ public class RespuestaController {
 
     @DeleteMapping("/{id}")
     @Transactional
-//    @Operation(summary = "Elimina un paciente a partir del ID")
+    @Operation(summary = "Elimina una respuesta",
+            tags = "Respuestas",
+            description = "Elimina una respuesta específica utilizando su ID.")
     public ResponseEntity eliminar(@PathVariable Long id) {
         respuestaService.eliminarRespuesta(id);
         return ResponseEntity.noContent().build();

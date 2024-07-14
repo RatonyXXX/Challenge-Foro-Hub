@@ -1,6 +1,7 @@
 package com.alurachallenge.forohub.controller;
 
 import com.alurachallenge.forohub.domain.curso.*;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public class CursoController {
 
     @PostMapping
     @Transactional
-//    @Operation(summary = "Registra un nuevo paciente")
+    @Operation(summary = "Registra un nuevo curso",
+            tags = "Cursos",
+            description = "Registra un nuevo curso con los detalles proporcionados en la solicitud.")
     public ResponseEntity registro(@RequestBody @Valid DatosCursoRegistro datosCurso, UriComponentsBuilder uriBuilder) {
         var curso = new Curso(datosCurso);
         cursoRepository.save(curso);
@@ -36,21 +39,27 @@ public class CursoController {
 
     @PutMapping
     @Transactional
-//    @Operation(summary = "Actualiza las informaciones para el paciente")
+    @Operation(summary = "Actualiza los detalles de un curso",
+            tags = "Cursos",
+            description = "Actualiza la información de un curso existente con los nuevos detalles proporcionados.")
     public ResponseEntity actualizar(@RequestBody @Valid DatosCursoActualizar datosCurso) {
         var response = cursoService.actualizarCurso(datosCurso);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-//    @Operation(summary = "obtiene los detalles de la consulta con el ID indicado")
+    @Operation(summary = "Obtiene los detalles de un curso",
+            tags = "Cursos",
+            description = "Obtiene los detalles completos de un curso específico utilizando su ID.")
     public ResponseEntity detalle(@PathVariable Long id) {
         var curso = cursoRepository.getReferenceById(id);
         return ResponseEntity.ok(new DatosCursoDetalle(curso));
     }
 
     @GetMapping
-    //@Operation(sumary = "Obtiene un listado de los perfiles registrados")
+    @Operation(summary = "Obtiene un listado de cursos",
+            tags = "Cursos",
+            description = "Obtiene un listado paginado de todos los cursos registrados en el sistema.")
     public ResponseEntity<Page<DatosCursoDetalle>> listado(
             @PageableDefault(size = 100, sort = {"categoria", "nombre"}) Pageable paginacion) {
         var page = cursoRepository.findAll(paginacion).map(DatosCursoDetalle::new);
