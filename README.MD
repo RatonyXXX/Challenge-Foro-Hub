@@ -24,16 +24,16 @@ Este proyecto es un sistema de gestión de foros llamado ForoHub, desarrollado c
 ## Capturas de Pantalla
 
 ### Pantalla de Inicio
-![Pantalla de Inicio](screenshots/home.png)
+![Pantalla de Inicio](screenshots/inicio.png)
 
 ### Ejemplo de Registro de Usuario
-![Registro de Usuario](screenshots/registro_usuario.png)
+![Registro de Usuario](screenshots/usuario.png)
 
 ### Listado de Cursos
-![Listado de Cursos](screenshots/listado_cursos.png)
+![Listado de Cursos](screenshots/curso.png)
 
 ### Detalle de Tema
-![Detalle de Tema](screenshots/detalle_tema.png)
+![Detalle de Tema](screenshots/topico.png)
 
 ## Instalación y Uso
 Para ejecutar localmente el proyecto:
